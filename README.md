@@ -1,0 +1,1 @@
+# smart-factory-material-crud-table-panel
