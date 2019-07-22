@@ -77,8 +77,15 @@ export class TableCtrl extends MetricsPanelCtrl {
           return ''
         }
       })
-      $scope.ctrl.currentMaterial = utils.findMaterialById($scope.ctrl.materials, rowData[0])[0]
-      materialOption.showOptionModal($scope.ctrl)
+
+      const idIndex = $scope.ctrl.colDimensions.indexOf("id")
+      if (!~idIndex) {
+        utils.alert('error', 'Error', 'Get not get this material from the database, please contact the dev team')
+        return
+      }else {
+        $scope.ctrl.currentMaterial = utils.findMaterialById($scope.ctrl.materials, rowData[idIndex])[0]
+        materialOption.showOptionModal($scope.ctrl)
+      }
     })
   }
 
@@ -152,28 +159,24 @@ export class TableCtrl extends MetricsPanelCtrl {
 
     // check filter keywords
     this.checkFilterKeyWord()
-    this.render();
+    // this.render();
   }
 
   checkFilterKeyWord(){
     const key = this.filterKeyword
     this.dataRaw = utils.copy(this.wholeData)
-    if (key !== undefined && key !== null) {
-      if (key === '') {
-        this.render()
-      }else {
-        // search
-        const idIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'id')
-        const descIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'description')
-        const filteredRows = this.dataRaw[0].rows.filter(row => {
-          if (row[idIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
-            return row
-          }
-        })
-        this.dataRaw[0].rows = filteredRows
-        this.render()
-      }
+    if (key) {
+      // search
+      const idIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'id')
+      const descIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'description')
+      const filteredRows = this.dataRaw[0].rows.filter(row => {
+        if (row[idIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
+          return row
+        }
+      })
+      this.dataRaw[0].rows = filteredRows
     }
+    this.render()
   }
 
   onAddButtonClick(){
@@ -299,6 +302,11 @@ export class TableCtrl extends MetricsPanelCtrl {
       appendPaginationControls(footerElem);
       const height = parseInt(getTableHeight().split('px')[0]) - 38 + 'px'
       rootElem.css({ 'max-height': panel.scroll ? height : '' });
+
+      // get current table column dimensions 
+      if (ctrl.table.columns) {
+        ctrl.colDimensions = ctrl.table.columns.filter(x => !x.hidden).map(x => x.text)
+      }
     }
 
     // hook up link tooltips

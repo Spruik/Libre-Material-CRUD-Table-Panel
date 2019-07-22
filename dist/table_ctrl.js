@@ -165,8 +165,15 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
                 return '';
               }
             });
-            $scope.ctrl.currentMaterial = utils.findMaterialById($scope.ctrl.materials, rowData[0])[0];
-            materialOption.showOptionModal($scope.ctrl);
+
+            var idIndex = $scope.ctrl.colDimensions.indexOf("id");
+            if (!~idIndex) {
+              utils.alert('error', 'Error', 'Get not get this material from the database, please contact the dev team');
+              return;
+            } else {
+              $scope.ctrl.currentMaterial = utils.findMaterialById($scope.ctrl.materials, rowData[idIndex])[0];
+              materialOption.showOptionModal($scope.ctrl);
+            }
           });
           return _this;
         }
@@ -249,29 +256,25 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
 
             // check filter keywords
             this.checkFilterKeyWord();
-            this.render();
+            // this.render();
           }
         }, {
           key: 'checkFilterKeyWord',
           value: function checkFilterKeyWord() {
             var key = this.filterKeyword;
             this.dataRaw = utils.copy(this.wholeData);
-            if (key !== undefined && key !== null) {
-              if (key === '') {
-                this.render();
-              } else {
-                // search
-                var idIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'id');
-                var descIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'description');
-                var filteredRows = this.dataRaw[0].rows.filter(function (row) {
-                  if (row[idIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
-                    return row;
-                  }
-                });
-                this.dataRaw[0].rows = filteredRows;
-                this.render();
-              }
+            if (key) {
+              // search
+              var idIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'id');
+              var descIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'description');
+              var filteredRows = this.dataRaw[0].rows.filter(function (row) {
+                if (row[idIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
+                  return row;
+                }
+              });
+              this.dataRaw[0].rows = filteredRows;
             }
+            this.render();
           }
         }, {
           key: 'onAddButtonClick',
@@ -396,6 +399,15 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
               appendPaginationControls(footerElem);
               var height = parseInt(getTableHeight().split('px')[0]) - 38 + 'px';
               rootElem.css({ 'max-height': panel.scroll ? height : '' });
+
+              // get current table column dimensions 
+              if (ctrl.table.columns) {
+                ctrl.colDimensions = ctrl.table.columns.filter(function (x) {
+                  return !x.hidden;
+                }).map(function (x) {
+                  return x.text;
+                });
+              }
             }
 
             // hook up link tooltips
