@@ -13,9 +13,10 @@ System.register(['./utils', './apis'], function (_export, _context) {
     execute: function () {
       onSubmit = function onSubmit(scope) {
         return function () {
-          // check id here, if match any id that exists, stop.
-          var indexOfId = scope.materialIds.indexOf(scope.materialForm.material.id);
-          if (indexOfId !== -1) {
+          // check name here, if match any name that exists, stop.
+          // we call it name, but for users, it's the ID
+          var nameIndex = scope.materialNames.indexOf(scope.materialForm.material.name);
+          if (nameIndex !== -1) {
             utils.alert('warning', 'Id exists', 'The ID of the material you are creating exists');
             return;
           }
@@ -29,7 +30,7 @@ System.register(['./utils', './apis'], function (_export, _context) {
       preprocess = function preprocess(scope) {
         scope.materialForm = {
           material: {
-            id: '',
+            name: '',
             description: '',
             description2: '',
             unit: ''

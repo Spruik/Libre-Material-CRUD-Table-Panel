@@ -166,12 +166,14 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
               }
             });
 
-            var idIndex = $scope.ctrl.colDimensions.indexOf("id");
-            if (!~idIndex) {
+            // in database id is the increment key, but for the user, id is the name
+            // so for inside code, we call it the name, but for outside where the user can reach we call it id to reduce user's confusion
+            var nameIndex = $scope.ctrl.colDimensions.indexOf("name");
+            if (!~nameIndex) {
               utils.alert('error', 'Error', 'Get not get this material from the database, please contact the dev team');
               return;
             } else {
-              $scope.ctrl.currentMaterial = utils.findMaterialById($scope.ctrl.materials, rowData[idIndex])[0];
+              $scope.ctrl.currentMaterial = utils.findMaterialByName($scope.ctrl.materials, rowData[nameIndex])[0];
               materialOption.showOptionModal($scope.ctrl);
             }
           });
@@ -231,8 +233,8 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
             this.materialDimensions = dataList[0].columns.map(function (col) {
               return col.text;
             });
-            this.materialIds = this.materials.map(function (material) {
-              return material.id;
+            this.materialNames = this.materials.map(function (material) {
+              return material.name;
             });
 
             this.dataRaw = dataList;
@@ -265,10 +267,10 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
             this.dataRaw = utils.copy(this.wholeData);
             if (key) {
               // search
-              var idIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'id');
+              var nameIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'name');
               var descIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'description');
               var filteredRows = this.dataRaw[0].rows.filter(function (row) {
-                if (row[idIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
+                if (row[nameIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
                   return row;
                 }
               });

@@ -2,7 +2,7 @@ import * as utils from './utils'
 
 export const addMaterial = (material, success, fail) => {
   const toSend = {
-    id: material.id,
+    name: material.name,
     description: material.description,
     description_optional: material.description2 || null,
     unit_of_measure: material.unit,
@@ -18,7 +18,7 @@ export const addMaterial = (material, success, fail) => {
 
 export const updateMaterial = (originalId, material, success, fail) => {
   const toSend = {
-    id: material.id,
+    name: material.name,
     description: material.description,
     description_optional: material.description2 || null,
     unit_of_measure: material.unit,

@@ -168,8 +168,8 @@ export const getRestructuredData = (rawCols, rows) => {
   return data
 }
 
-export const findMaterialById = (materials, key) => {
-  return materials.filter(material => material.id === key)
+export const findMaterialByName = (materials, key) => {
+  return materials.filter(material => material.name === key)
 }
 
 export const findIndexByKeyOnDimension = (dimension, key) => {

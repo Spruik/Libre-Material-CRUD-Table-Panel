@@ -78,12 +78,14 @@ export class TableCtrl extends MetricsPanelCtrl {
         }
       })
 
-      const idIndex = $scope.ctrl.colDimensions.indexOf("id")
-      if (!~idIndex) {
+      // in database id is the increment key, but for the user, id is the name
+      // so for inside code, we call it the name, but for outside where the user can reach we call it id to reduce user's confusion
+      const nameIndex = $scope.ctrl.colDimensions.indexOf("name")
+      if (!~nameIndex) {
         utils.alert('error', 'Error', 'Get not get this material from the database, please contact the dev team')
         return
       }else {
-        $scope.ctrl.currentMaterial = utils.findMaterialById($scope.ctrl.materials, rowData[idIndex])[0]
+        $scope.ctrl.currentMaterial = utils.findMaterialByName($scope.ctrl.materials, rowData[nameIndex])[0]
         materialOption.showOptionModal($scope.ctrl)
       }
     })
@@ -136,7 +138,7 @@ export class TableCtrl extends MetricsPanelCtrl {
     dataList = this.sortList(dataList)
     this.materials = utils.getRestructuredData(dataList[0].columns, dataList[0].rows)
     this.materialDimensions = dataList[0].columns.map(col => col.text)
-    this.materialIds = this.materials.map(material => material.id)
+    this.materialNames = this.materials.map(material => material.name)
 
     this.dataRaw = dataList;
     this.wholeData = utils.copy(this.dataRaw)
@@ -167,10 +169,10 @@ export class TableCtrl extends MetricsPanelCtrl {
     this.dataRaw = utils.copy(this.wholeData)
     if (key) {
       // search
-      const idIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'id')
+      const nameIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'name')
       const descIndex = utils.findIndexByKeyOnDimension(this.materialDimensions, 'description')
       const filteredRows = this.dataRaw[0].rows.filter(row => {
-        if (row[idIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
+        if (row[nameIndex].toLowerCase().includes(key.toLowerCase()) || row[descIndex].toLowerCase().includes(key.toLowerCase())) {
           return row
         }
       })

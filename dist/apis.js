@@ -11,7 +11,7 @@ System.register(['./utils'], function (_export, _context) {
     execute: function () {
       _export('addMaterial', addMaterial = function addMaterial(material, success, fail) {
         var toSend = {
-          id: material.id,
+          name: material.name,
           description: material.description,
           description_optional: material.description2 || null,
           unit_of_measure: material.unit
@@ -29,7 +29,7 @@ System.register(['./utils'], function (_export, _context) {
 
       _export('updateMaterial', updateMaterial = function updateMaterial(originalId, material, success, fail) {
         var toSend = {
-          id: material.id,
+          name: material.name,
           description: material.description,
           description_optional: material.description2 || null,
           unit_of_measure: material.unit

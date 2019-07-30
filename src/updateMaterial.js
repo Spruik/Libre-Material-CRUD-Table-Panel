@@ -5,8 +5,8 @@ const onSubmit = scope => () => {
   const cur = scope.currentMaterial
   const newMaterial = scope.materialForm.material
 
-  if (newMaterial.id !== cur.id) {
-    const result = scope.materialIds.filter(id => id === newMaterial.id && id !== cur.id)
+  if (newMaterial.name !== cur.name) {
+    const result = scope.materialNames.filter(name => name === newMaterial.name && name !== cur.name)
     if (result.length >= 1) {
       utils.alert('warning', 'Id exists', 'The ID of the material you are updating exists')
       return
@@ -28,7 +28,8 @@ const preprocess = scope => {
       id : cur.id,
       description: cur.description,
       description2: cur.description_optional,
-      unit: cur.unit_of_measure
+      unit: cur.unit_of_measure,
+      name: cur.name
     },
     func: {
       onSubmit: onSubmit(scope)

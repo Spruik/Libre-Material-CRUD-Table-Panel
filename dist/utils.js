@@ -3,7 +3,7 @@
 System.register(['app/core/core'], function (_export, _context) {
   "use strict";
 
-  var appEvents, hostname, postgRestHost, influxHost, post, remove, get, update, alert, showModal, showLargeModal, spaceCheck, successCallBack, failCallBack, getRestructuredData, findMaterialById, findIndexByKeyOnDimension, getDimension, copy, hasObjectChanged;
+  var appEvents, hostname, postgRestHost, influxHost, post, remove, get, update, alert, showModal, showLargeModal, spaceCheck, successCallBack, failCallBack, getRestructuredData, findMaterialByName, findIndexByKeyOnDimension, getDimension, copy, hasObjectChanged;
   return {
     setters: [function (_appCoreCore) {
       appEvents = _appCoreCore.appEvents;
@@ -212,13 +212,13 @@ System.register(['app/core/core'], function (_export, _context) {
 
       _export('getRestructuredData', getRestructuredData);
 
-      _export('findMaterialById', findMaterialById = function findMaterialById(materials, key) {
+      _export('findMaterialByName', findMaterialByName = function findMaterialByName(materials, key) {
         return materials.filter(function (material) {
-          return material.id === key;
+          return material.name === key;
         });
       });
 
-      _export('findMaterialById', findMaterialById);
+      _export('findMaterialByName', findMaterialByName);
 
       _export('findIndexByKeyOnDimension', findIndexByKeyOnDimension = function findIndexByKeyOnDimension(dimension, key) {
         return dimension.indexOf(key);

@@ -3,6 +3,7 @@ import * as updateMaterial from './updateMaterial'
 import * as apis from './apis'
 
 const onUpdateClick = scope => () => {
+  console.log(scope)
   updateMaterial.showMaterialForm(scope)
 }
 

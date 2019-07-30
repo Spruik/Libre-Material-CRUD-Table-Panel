@@ -15,6 +15,7 @@ System.register(['./utils', './updateMaterial', './apis'], function (_export, _c
     execute: function () {
       onUpdateClick = function onUpdateClick(scope) {
         return function () {
+          console.log(scope);
           updateMaterial.showMaterialForm(scope);
         };
       };

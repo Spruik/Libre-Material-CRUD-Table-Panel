@@ -16,9 +16,9 @@ System.register(['./utils', './apis'], function (_export, _context) {
           var cur = scope.currentMaterial;
           var newMaterial = scope.materialForm.material;
 
-          if (newMaterial.id !== cur.id) {
-            var result = scope.materialIds.filter(function (id) {
-              return id === newMaterial.id && id !== cur.id;
+          if (newMaterial.name !== cur.name) {
+            var result = scope.materialNames.filter(function (name) {
+              return name === newMaterial.name && name !== cur.name;
             });
             if (result.length >= 1) {
               utils.alert('warning', 'Id exists', 'The ID of the material you are updating exists');
@@ -39,7 +39,8 @@ System.register(['./utils', './apis'], function (_export, _context) {
             id: cur.id,
             description: cur.description,
             description2: cur.description_optional,
-            unit: cur.unit_of_measure
+            unit: cur.unit_of_measure,
+            name: cur.name
           },
           func: {
             onSubmit: onSubmit(scope)
