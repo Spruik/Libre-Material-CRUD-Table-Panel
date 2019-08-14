@@ -1,4 +1,4 @@
-<div>
+<div ng-if="ctrl.table.rows.length !== 0 || ctrl.filterKeyword">
   <span>
     <span id="" style="font-size: 12px; margin-right: 10px">Filter by id/desc:     
       <input type="text" style="width: 30%" class="md-products-datalist-input" ng-change="ctrl.checkFilterKeyWord()" ng-model="ctrl.filterKeyword">
@@ -10,6 +10,7 @@
     </span>
   </span>
 </div>
+
 <div class="table-panel-container" style="margin-top:5px; margin-bottom:10px">
 	<div class="table-panel-header-bg" ng-show="ctrl.table.rows.length"></div>
 	<div class="table-panel-scroll" ng-show="ctrl.table.rows.length">

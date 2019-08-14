@@ -299,7 +299,7 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
           key: 'render',
           value: function render() {
             this.table = transformDataToTable(this.dataRaw, this.panel);
-            // this.table.sort(this.panel.sort);
+            this.table.sort(this.panel.sort);
             this.renderer = new TableRenderer(this.panel, this.table, this.dashboard.isTimezoneUtc(), this.$sanitize, this.templateSrv, this.col);
 
             return _get(TableCtrl.prototype.__proto__ || Object.getPrototypeOf(TableCtrl.prototype), 'render', this).call(this, this.table);
