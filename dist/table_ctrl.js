@@ -291,7 +291,7 @@ System.register(['lodash', 'jquery', 'app/plugins/sdk', './transformers', './edi
             }
 
             dataList[0].rows = dataList[0].rows.sort(function (a, b) {
-              return a[0].localeCompare(b[0]);
+              return (a[1] + '').localeCompare(b[1] + '');
             });
             return dataList;
           }

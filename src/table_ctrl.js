@@ -190,8 +190,8 @@ export class TableCtrl extends MetricsPanelCtrl {
       return dataList
     }
 
-    dataList[0].rows = dataList[0].rows.sort((a,b) => a[0].localeCompare(b[0]))
-    return dataList
+    dataList[0].rows = dataList[0].rows.sort((a,b) => (a[1] + '').localeCompare(b[1] + ''))
+    return dataList;
   }
 
   render() {
