@@ -1,24 +1,23 @@
 module.exports = function (grunt) {
-  require("load-grunt-tasks")(grunt);
+  require('load-grunt-tasks')(grunt)
 
-  grunt.loadNpmTasks('grunt-execute');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-multi-dest');
-  grunt.loadNpmTasks('grunt-babel');
-  grunt.loadNpmTasks('grunt-force-task');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-execute')
+  grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-multi-dest')
+  grunt.loadNpmTasks('grunt-babel')
+  grunt.loadNpmTasks('grunt-force-task')
+  grunt.loadNpmTasks('grunt-contrib-jshint')
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    clean: ["dist"],
+    clean: ['dist', 'libre-material-crud-table-panel.zip'],
 
     jshint: {
       options: {
-        jshintrc: '.jshintrc',
+        jshintrc: '.jshintrc'
       },
-      src: ['Gruntfile.js', 'src/*.js'],
+      src: ['Gruntfile.js', 'src/*.js']
     },
-    
     copy: {
       src_to_dist: {
         cwd: 'src',
@@ -33,13 +32,13 @@ module.exports = function (grunt) {
         dest: 'dist/libs',
         options: {
           process: content => content.replace(/(\'|")ion.rangeSlider(\'|")/g, '$1./ion.rangeSlider.min$2'), // eslint-disable-line
-        },
+        }
       },
       echarts_libs: {
         cwd: 'node_modules/echarts/dist',
         expand: true,
         src: ['echarts.min.js'],
-        dest: 'dist/libs/',
+        dest: 'dist/libs/'
       },
       image_to_dist: {
         cwd: 'src',
@@ -50,7 +49,27 @@ module.exports = function (grunt) {
       pluginDef: {
         expand: true,
         src: ['plugin.json'],
-        dest: 'dist',
+        dest: 'dist'
+      },
+      readme: {
+        expand: true,
+        src: ['README.md', 'docs/**', 'LICENSE', 'MAINTAINERS'],
+        dest: 'dist'
+      }
+    },
+    'string-replace': {
+      dist: {
+        files: {
+          'dist/README.md': 'dist/README.md'
+        },
+        options: {
+          replacements: [
+            {
+              pattern: /docs\//g,
+              replacement: 'public/plugins/libre-material-crud-table-panel/docs/'
+            }
+          ]
+        }
       }
     },
 
@@ -58,16 +77,15 @@ module.exports = function (grunt) {
       rebuild_all: {
         files: ['src/**/*', 'plugin.json'],
         tasks: ['default'],
-        options: {spawn: false}
-      },
+        options: { spawn: false }
+      }
     },
-
     babel: {
       options: {
-        ignore: ["**/src/libs/*"],
+        ignore: ['**/src/libs/*'],
         sourceMap: true,
-        presets: ["es2015"],
-        plugins: ['transform-es2015-modules-systemjs', "transform-es2015-for-of"],
+        presets: ['es2015'],
+        plugins: ['transform-es2015-modules-systemjs', 'transform-es2015-for-of']
       },
       dist: {
         files: [{
@@ -77,16 +95,32 @@ module.exports = function (grunt) {
           dest: 'dist',
           ext: '.js'
         }]
-      },
+      }
     },
-  });
+
+    compress: {
+      main: {
+        options: {
+          archive: 'libre-operation-crud-table-panel.zip'
+        },
+        expand: true,
+        cwd: 'dist/',
+        src: ['**/*']
+      }
+    }
+  })
   grunt.registerTask('default', [
     // 'jshint',
-    'clean',
-    "copy:src_to_dist",
+    'copy:src_to_dist',
     'copy:libs',
-    // 'copy:echarts_libs',
-    "copy:pluginDef",
-    'copy:image_to_dist',
-    'babel']);
-};
+    'copy:readme',
+    'string-replace',
+    'copy:pluginDef',
+    'babel'])
+
+  grunt.registerTask('build', [
+    'clean',
+    'default',
+    'compress'
+  ])
+}
