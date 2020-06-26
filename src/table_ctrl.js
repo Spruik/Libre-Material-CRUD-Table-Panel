@@ -345,4 +345,4 @@ export class TableCtrl extends MetricsPanelCtrl {
   }
 }
 
-TableCtrl.templateUrl = './partials/module.html'
+TableCtrl.templateUrl = 'public/plugins/libre-material-crud-table-panel/partials/module.html'

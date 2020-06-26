@@ -81,7 +81,7 @@ export function tablePanelEditor ($q, uiSegmentSrv) {
   return {
     restrict: 'E',
     scope: true,
-    templateUrl: 'public/plugins/smart-factory-products-crud-table-panel/partials/editor.html',
+    templateUrl: 'public/plugins/libre-material-crud-table-panel/partials/editor.html',
     controller: TablePanelEditorCtrl
   }
 }

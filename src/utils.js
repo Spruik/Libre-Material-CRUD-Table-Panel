@@ -111,7 +111,7 @@ export const alert = (type, title, msg) => {
 
 export const showModal = (html, data) => {
   appEvents.emit('show-modal', {
-    src: 'public/plugins/smart-factory-material-crud-table-panel/partials/' + html,
+    src: 'public/plugins/libre-material-crud-table-panel/partials/' + html,
     modalClass: 'confirm-modal',
     model: data
   })
@@ -119,7 +119,7 @@ export const showModal = (html, data) => {
 
 export const showLargeModal = (html, data) => {
   appEvents.emit('show-modal', {
-    src: 'public/plugins/smart-factory-material-crud-table-panel/partials/' + html,
+    src: 'public/plugins/libre-material-crud-table-panel/partials/' + html,
     modalClass: '',
     model: data
   })
