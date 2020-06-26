@@ -8,7 +8,7 @@ Material objects have four properties.
 
 1. name - Name of the material _required, limited to 20 characters_
 2. description - Description of the product _required, limited to 50 characters_
-3. description_optional - Operational description of the packagin type _limited to 50 characters_
+3. description_optional - Optional description of the packaging type _limited to 50 characters_
 4. unit_of_measure - U.O.M. _limited to 10 characters_
 
 ![Material Panel](./docs/libre-material-crud-table-panel.gif)
@@ -53,11 +53,13 @@ In order to get the most out of this panel:
 
 2. Apply custom column styles:
 
-| Column   | Type   | Name Override | Other                    |
-|----------|--------|---------------|--------------------------|
-| id       | hidden |       -       |   -                      |
-| name     | String | ID            |   -                      |
-| sequence | Number | SEQUENCE      | unit: short, decimals: 0 |
+| Column               | Type   | Name Override | Other |
+|----------------------|--------|---------------|-------|
+| id                   | hidden |       -       |   -   |
+| name                 | String | ID            |   -   |
+| description          | String | Description   |   -   |
+| description_optional | String | Description 2 |   -   |
+| unit_of_measure      | String | UOM           |   -   |
 
 ### Adding
 
@@ -88,7 +90,7 @@ Start by cloning this repository
 
 ```shell
 ~/
-$ git clone https://github.com/Spruik/Libre-Operation-CRUD-Table-Panel
+$ git clone https://github.com/Spruik/Libre-Material-CRUD-Table-Panel
 Cloning into 'libre-material-crud-table-panel'...
 remote: Enumerating objects: 46, done.
 remote: Counting objects: 100% (46/46), done.
@@ -209,7 +211,7 @@ Find a completed build of this panel in the root directory named `libre-material
 
 For any issue, there are fundamentally three ways an individual can contribute:
 
-- By opening the issue for discussion: For instance, if you believe that you have uncovered a bug in, creating a new issue in the [GitHub issue tracker](https://github.com/Spruik/Libre-Operation-CRUD-Table-Panel/issues) is the way to report it.
+- By opening the issue for discussion: For instance, if you believe that you have uncovered a bug in, creating a new issue in the [GitHub issue tracker](https://github.com/Spruik/Libre-Material-CRUD-Table-Panel/issues) is the way to report it.
 - By helping to triage the issue: This can be done either by providing supporting details (a test case that demonstrates a bug), or providing suggestions on how to address the issue.
 - By helping to resolve the issue: Typically, this is done either in the form of demonstrating that the issue reported is not a problem after all, or more often, by opening a Pull Request that changes some bit of something in the panel in a concrete and reviewable manner.
 

@@ -101,7 +101,7 @@ module.exports = function (grunt) {
     compress: {
       main: {
         options: {
-          archive: 'libre-operation-crud-table-panel.zip'
+          archive: 'libre-material-crud-table-panel.zip'
         },
         expand: true,
         cwd: 'dist/',
