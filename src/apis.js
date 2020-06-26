@@ -5,7 +5,7 @@ export const addMaterial = (material, success, fail) => {
     name: material.name,
     description: material.description,
     description_optional: material.description2 || null,
-    unit_of_measure: material.unit,
+    unit_of_measure: material.unit
   }
 
   const url = utils.postgRestHost + 'material'
@@ -21,7 +21,7 @@ export const updateMaterial = (originalId, material, success, fail) => {
     name: material.name,
     description: material.description,
     description_optional: material.description2 || null,
-    unit_of_measure: material.unit,
+    unit_of_measure: material.unit
   }
 
   const url = `${utils.postgRestHost}material?id=eq.${originalId}`

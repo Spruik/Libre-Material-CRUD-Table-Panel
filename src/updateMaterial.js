@@ -14,7 +14,7 @@ const onSubmit = scope => () => {
   }
 
   apis.updateMaterial(
-    cur.id, 
+    cur.id,
     newMaterial,
     utils.successCallBack('mct-material-form-cancelBtn', 'Material has been updated successfully', scope),
     e => utils.failCallBack('mct-material-form-cancelBtn', `Error occurred when updating the material due to ${e}, please try again`)
@@ -25,7 +25,7 @@ const preprocess = scope => {
   const cur = scope.currentMaterial
   scope.materialForm = {
     material: {
-      id : cur.id,
+      id: cur.id,
       description: cur.description,
       description2: cur.description_optional,
       unit: cur.unit_of_measure,
