@@ -5,10 +5,10 @@ const onSubmit = scope => () => {
   // check name here, if match any name that exists, stop.
   // we call it name, but for users, it's the ID
   const nameIndex = scope.materialNames.indexOf(scope.materialForm.material.name)
-  if (nameIndex !== -1) { 
+  if (nameIndex !== -1) {
     utils.alert('warning', 'Id exists', 'The ID of the material you are creating exists')
     return
-   }
+  }
 
   apis.addMaterial(
     scope.materialForm.material,
@@ -20,7 +20,7 @@ const onSubmit = scope => () => {
 const preprocess = scope => {
   scope.materialForm = {
     material: {
-      name : '',
+      name: '',
       description: '',
       description2: '',
       unit: ''

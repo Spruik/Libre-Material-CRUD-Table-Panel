@@ -5,32 +5,32 @@ export const postgRestHost = 'http://' + hostname + ':5436/'
 export const influxHost = 'http://' + hostname + ':8086/'
 
 export const post = (url, line) => {
-    return new Promise((resolve, reject) => {
-      var xhr = new XMLHttpRequest()
-      xhr.open('POST', url)
-      xhr.onreadystatechange = handleResponse
-      xhr.setRequestHeader("Accept", "application/json");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onerror = e => reject(e)
-      xhr.send(line)
-  
-      function handleResponse () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            // console.log('200');
-            resolve(xhr.responseText)
-          } else if (xhr.status === 204) {
-            // console.log('204');
-            resolve(xhr.responseText)
-          } else if (xhr.status === 201) {
-            resolve(xhr.responseText)
-          } else {
-            reject(xhr.responseText)
-          }
+  return new Promise((resolve, reject) => {
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', url)
+    xhr.onreadystatechange = handleResponse
+    xhr.setRequestHeader('Accept', 'application/json')
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onerror = e => reject(e)
+    xhr.send(line)
+
+    function handleResponse () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          // console.log('200');
+          resolve(xhr.responseText)
+        } else if (xhr.status === 204) {
+          // console.log('204');
+          resolve(xhr.responseText)
+        } else if (xhr.status === 201) {
+          resolve(xhr.responseText)
+        } else {
+          reject(xhr.responseText)
         }
       }
-    })
-  }
+    }
+  })
+}
 
 export const remove = (url) => {
   return new Promise((resolve, reject) => {
@@ -82,8 +82,8 @@ export const update = (url, line) => {
     var xhr = new XMLHttpRequest()
     xhr.open('PATCH', url)
     xhr.onreadystatechange = handleResponse
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");      
+    xhr.setRequestHeader('Accept', 'application/json')
+    xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onerror = e => reject(e)
     xhr.send(line)
 
@@ -111,16 +111,15 @@ export const alert = (type, title, msg) => {
 
 export const showModal = (html, data) => {
   appEvents.emit('show-modal', {
-    src: 'public/plugins/smart-factory-material-crud-table-panel/partials/' + html,
+    src: 'public/plugins/libre-material-crud-table-panel/partials/' + html,
     modalClass: 'confirm-modal',
     model: data
   })
 }
 
-
 export const showLargeModal = (html, data) => {
   appEvents.emit('show-modal', {
-    src: 'public/plugins/smart-factory-material-crud-table-panel/partials/' + html,
+    src: 'public/plugins/libre-material-crud-table-panel/partials/' + html,
     modalClass: '',
     model: data
   })
@@ -150,18 +149,18 @@ export const failCallBack = (modalId, failMsg) => {
 }
 
 export const getRestructuredData = (rawCols, rows) => {
-  let data = []
-  let cols = rawCols.reduce((arr, c) => {
+  const data = []
+  const cols = rawCols.reduce((arr, c) => {
     const col = c.text.toLowerCase()
     arr.push(col)
     return arr
   }, [])
   for (let i = 0; i < rows.length; i++) {
-    const row = rows[i];
-    let serise = {}
+    const row = rows[i]
+    const serise = {}
     for (let k = 0; k < cols.length; k++) {
-        const col = cols[k];
-        serise[col] = row[k]
+      const col = cols[k]
+      serise[col] = row[k]
     }
     data.push(serise)
   }
@@ -181,7 +180,7 @@ export const getDimension = cols => {
 }
 
 export const copy = obj => {
-  return JSON.parse(JSON.stringify(obj)) 
+  return JSON.parse(JSON.stringify(obj))
 }
 
 export const hasObjectChanged = (oldObj, newObj) => {
