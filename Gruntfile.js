@@ -25,21 +25,6 @@ module.exports = function (grunt) {
         src: ['**/*', '!**/*.js', '!image/**/*'],
         dest: 'dist'
       },
-      libs: {
-        cwd: 'libs',
-        expand: true,
-        src: ['**.*'],
-        dest: 'dist/libs',
-        options: {
-          process: content => content.replace(/(\'|")ion.rangeSlider(\'|")/g, '$1./ion.rangeSlider.min$2'), // eslint-disable-line
-        }
-      },
-      echarts_libs: {
-        cwd: 'node_modules/echarts/dist',
-        expand: true,
-        src: ['echarts.min.js'],
-        dest: 'dist/libs/'
-      },
       image_to_dist: {
         cwd: 'src',
         expand: true,
@@ -110,9 +95,7 @@ module.exports = function (grunt) {
     }
   })
   grunt.registerTask('default', [
-    // 'jshint',
     'copy:src_to_dist',
-    'copy:libs',
     'copy:readme',
     'string-replace',
     'copy:pluginDef',
