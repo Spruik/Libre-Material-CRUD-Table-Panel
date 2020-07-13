@@ -221,4 +221,9 @@ For any issue, there are fundamentally three ways an individual can contribute:
 
 ## Change log
 
+- 1.0.1 Update Documentation
+  - Remove unused grunt config
+  - Fix shell outputs and subtitle
+  - Expose simmulator port
+
 - 1.0.0 Initial Public Release
