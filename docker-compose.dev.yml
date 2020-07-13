@@ -34,6 +34,8 @@ services:
     image: spruiktec/libre-simulator
     depends_on: 
       - postrest
+    ports:
+      - 1880:1880
   postgres:
     image: spruiktec/libre-postgres
     environment: *common-postgres-variables
