@@ -25,8 +25,8 @@
       {"name": "Panel Metrics", "url":"public/plugins/libre-material-crud-table-panel/docs/libre-material-crud-table-panel-metrics.png"},
       {"name": "Material Search", "url":"public/plugins/libre-material-crud-table-panel/docs/libre-material-crud-table-panel-search.png"}
     ],
-    "version": "1.0.1",
-    "updated": "2020-07-13"
+    "version": "1.0.2",
+    "updated": "2020-08-06"
   },
   "dependencies": {
     "grafanaVersion": "6.x.x",
