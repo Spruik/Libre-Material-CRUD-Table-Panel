@@ -1,6 +1,6 @@
 {
   "name": "libre-material-crud-table-panel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Libre Grafana panel for Create, Read, Update and Delete of Materials",
   "homepage": "https://github.com/Spruik/Libre-Material-CRUD-Table-Panel",
   "repository": {
